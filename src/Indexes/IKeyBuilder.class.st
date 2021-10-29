@@ -39,10 +39,12 @@ IKeyBuilder >> build [
 
 { #category : #building }
 IKeyBuilder >> buildIndex [
-	self result
-		at: indexes
-		ifAbsent: [ result at: keySource put: IdentitySet new ].
-	(result at: keySource) add: val.
+	|ks index |
+	ks := self result
+		at: keySource
+		ifAbsentPut: IdentityDictionary new.
+	index := ks at: indexes ifAbsentPut: (IdentitySet new).
+	index add: val.
 ]
 
 { #category : #building }

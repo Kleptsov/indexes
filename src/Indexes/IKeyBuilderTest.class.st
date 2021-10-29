@@ -18,8 +18,8 @@ IKeyBuilderTest >> testBuildIndex [
 	builder val: 'value'.
 	builder indexes: 'value'.
 	builder buildIndex.
-	self assert: (builder result at: #asString) class equals: IdentitySet.
-	self assert: ((builder result at: #asString) like: 'value') equals: 'value'.
+	self assert: (builder result at: #asString) class equals: IdentityDictionary.
+	self assert: (((builder result at: #asString) at: 'value') like: 'value') equals: 'value'.
 ]
 
 { #category : #'as yet unclassified' }
