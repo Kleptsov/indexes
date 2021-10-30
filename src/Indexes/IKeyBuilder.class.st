@@ -42,16 +42,20 @@ IKeyBuilder >> buildIndex [
 	|ks index |
 	ks := self result
 		at: keySource
-		ifAbsentPut: IdentityDictionary new.
-	index := ks at: indexes ifAbsentPut: (IdentitySet new).
+		ifAbsentPut: [ Dictionary new ].
+	index := ks at: indexes ifAbsentPut: [ Set new ].
 	index add: val.
 ]
 
 { #category : #building }
 IKeyBuilder >> buildIndexes [
-	| s |
-	s := self result at: keySource ifAbsent: [ result at: keySource put: IdentitySet new ].
-	s addAll: indexes.
+	| keySourceDict indexSet |
+	
+	keySourceDict := self result at: keySource ifAbsentPut: [ Dictionary new ].
+	indexes do: [ :index|
+		indexSet := keySourceDict at: index ifAbsentPut: [ Set new ].
+		indexSet add: val.
+	]
 ]
 
 { #category : #accessing }
