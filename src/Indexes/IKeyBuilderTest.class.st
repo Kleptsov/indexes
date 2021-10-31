@@ -13,9 +13,31 @@ IKeyBuilderTest >> setUp [
 ]
 
 { #category : #tests }
+IKeyBuilderTest >> testBuildForRemovedIndex [
+	builder indexName: #asString.
+	builder indexValue: 'value'.
+	builder indexes: 'value'.
+	builder buildForRemovedIndex.
+	self assert: (builder forRemoved at: builder indexValue) class equals: Dictionary.
+	self assert: (((builder forRemoved at: builder indexValue) at: #asString) like: 'value') equals: 'value'.
+]
+
+{ #category : #tests }
+IKeyBuilderTest >> testBuildForRemovedIndexes [
+	builder indexName: #asString.
+	builder indexValue: 'value'.
+	builder indexes: {'1'. '2'. '3'. '4'}.
+	builder buildForRemovedIndexes.
+	self assert: (builder forRemoved at: builder indexValue) class equals: Dictionary.
+	self assert: (((builder forRemoved at: builder indexValue) at: #asString) like: '1') equals: '1'.
+	self assert: (((builder forRemoved at: builder indexValue) at: #asString) like: '3') equals: '3'.
+	self assert: (((builder forRemoved at: builder indexValue) at: #asString) size) equals: 4.
+]
+
+{ #category : #tests }
 IKeyBuilderTest >> testBuildIndex [
-	builder keySource: #asString.
-	builder val: 'value'.
+	builder indexName: #asString.
+	builder indexValue: 'value'.
 	builder indexes: 'value'.
 	builder buildIndex.
 	self assert: (builder result at: #asString) class equals: Dictionary.
@@ -24,8 +46,8 @@ IKeyBuilderTest >> testBuildIndex [
 
 { #category : #tests }
 IKeyBuilderTest >> testBuildIndexes [
-	builder keySource: #asString.
-	builder val: 'string'.
+	builder indexName: #asString.
+	builder indexValue: 'string'.
 	builder indexes: {'1'. '2'. '3'. '4'}.
 	builder buildIndexes.
 	self assert: (builder result at: #asString) class equals: Dictionary.

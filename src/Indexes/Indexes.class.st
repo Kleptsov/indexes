@@ -17,7 +17,7 @@ Internal Representation and Key Implementation Points.
 Class {
 	#name : #Indexes,
 	#superclass : #Dictionary,
-	#category : #'Indexes-Core'
+	#category : #'Indexes-Message'
 }
 
 { #category : #testing }

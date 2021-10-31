@@ -25,7 +25,7 @@ Class {
 		'collection',
 		'indexes'
 	],
-	#category : #'Indexes-Core'
+	#category : #'Indexes-Message'
 }
 
 { #category : #adding }
